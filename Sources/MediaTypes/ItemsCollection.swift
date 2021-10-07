@@ -9,7 +9,7 @@
 import Combine
 import Foundation
 
-public struct ItemsCollection<Item: MediaItemType> {
+public struct ItemsCollection<Item: MediaItem> {
     
     public let title: String
     public let itemsProvider: ((@escaping (([Item]) -> Void)) -> Void)

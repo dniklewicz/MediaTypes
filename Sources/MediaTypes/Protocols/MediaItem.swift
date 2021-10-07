@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-public protocol MediaItemType {
-    associatedtype InnerItemType: MediaItemType
+public protocol MediaItem {
+    associatedtype InnerItemType: MediaItem
     
     var thumbnail: Artwork? { get }
     var displayTitle: String { get }
@@ -24,7 +24,7 @@ public protocol MediaItemType {
 //    func fetchContainedItems(completion: ([InnerItemType]) -> Void)
 }
 
-public extension MediaItemType {
+public extension MediaItem {
     var isAvailable: Bool { true }
     var isPlayable: Bool { false }
 }

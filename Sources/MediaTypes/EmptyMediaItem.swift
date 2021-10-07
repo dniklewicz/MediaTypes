@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct EmptyMediaItem: MediaItemType {
+public struct EmptyMediaItem: MediaItem {
     public var thumbnail: Artwork? { nil }
     public var displayTitle: String { "" }
     public var displaySubtitle: String? { nil }
