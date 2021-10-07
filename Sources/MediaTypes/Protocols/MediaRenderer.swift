@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol MediaItemRenderer {
+public protocol MediaRenderer {
     associatedtype Item: MediaItem
     
     func play(item: Item)
