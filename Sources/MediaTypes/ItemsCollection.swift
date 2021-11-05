@@ -9,18 +9,66 @@
 import Combine
 import Foundation
 
-public struct ItemsCollection<Item: MediaItem> {
+public struct ItemsCollection: MediaItemsContainer {
+    public let thumbnail: Artwork?
+    public let displayTitle: String
+    public let displaySubtitle: String?
+    public let itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void)
     
-    public let title: String
-    public let itemsProvider: ((@escaping (([Item]) -> Void)) -> Void)
-    
-    public init(title: String, itemsProvider: @escaping ((@escaping (([Item]) -> Void)) -> Void)) {
-        self.title = title
+    public init(
+        displayTitle: String,
+        displaySubtitle: String? = nil,
+        thumbnail: Artwork?,
+        itemsProvider: @escaping ((@escaping (([MediaItem]) -> Void)) -> Void)
+    ) {
+        self.displayTitle = displayTitle
+        self.displaySubtitle = displaySubtitle
+        self.thumbnail = thumbnail
         self.itemsProvider = itemsProvider
     }
     
-    public init(title: String, items: [Item]) {
-        self.title = title
+    public init(
+        displayTitle: String,
+        displaySubtitle: String? = nil,
+        thumbnail: Artwork?,
+        items: [MediaItem]
+    ) {
+        self.displayTitle = displayTitle
+        self.displaySubtitle = displaySubtitle
+        self.thumbnail = thumbnail
+        self.itemsProvider = { result in
+            result(items)
+        }
+    }
+}
+
+public struct PlayableItemsCollection: PlayableMediaItemsContainer {
+    public let thumbnail: Artwork?
+    public let displayTitle: String
+    public let displaySubtitle: String?
+    public let itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void)
+    
+    public init(
+        displayTitle: String,
+        displaySubtitle: String? = nil,
+        thumbnail: Artwork?,
+        itemsProvider: @escaping ((@escaping (([MediaItem]) -> Void)) -> Void)
+    ) {
+        self.displayTitle = displayTitle
+        self.displaySubtitle = displaySubtitle
+        self.thumbnail = thumbnail
+        self.itemsProvider = itemsProvider
+    }
+    
+    public init(
+        displayTitle: String,
+        displaySubtitle: String? = nil,
+        thumbnail: Artwork?,
+        items: [MediaItem]
+    ) {
+        self.displayTitle = displayTitle
+        self.displaySubtitle = displaySubtitle
+        self.thumbnail = thumbnail
         self.itemsProvider = { result in
             result(items)
         }
