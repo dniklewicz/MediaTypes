@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-public struct EmptyMediaItem: MediaItem {
-    public var thumbnail: Artwork? { nil }
-    public var displayTitle: String { "" }
-    public var displaySubtitle: String? { nil }
-    public var isAvailable: Bool { false }
-    public var containedItems: ItemsCollection<EmptyMediaItem>? { nil }
-    
-    public init() {}
-}
+//public struct EmptyMediaItem: MediaItem {
+//    public var thumbnail: Artwork? { nil }
+//    public var displayTitle: String { "" }
+//    public var displaySubtitle: String? { nil }
+//    public var isAvailable: Bool { false }
+//    public var containedItems: ItemsCollection<EmptyMediaItem>? { nil }
+//    
+//    public init() {}
+//}
