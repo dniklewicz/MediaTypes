@@ -9,7 +9,10 @@
 import Combine
 import Foundation
 
-public struct ItemsCollection: MediaItemsContainer {
+public struct ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsContainer {
+    public var searchCriteria: [SearchCriteria] = []
+    public func search(for keyword: String, using: SearchCriteria, callback: @escaping ([MediaItem]) -> Void) {}
+    
     public let thumbnail: Artwork?
     public let displayTitle: String
     public let displaySubtitle: String?
@@ -42,7 +45,10 @@ public struct ItemsCollection: MediaItemsContainer {
     }
 }
 
-public struct PlayableItemsCollection: PlayableMediaItemsContainer {
+public struct PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: PlayableMediaItemsContainer {
+    public var searchCriteria: [SearchCriteria] = []
+    public func search(for keyword: String, using: SearchCriteria, callback: @escaping ([MediaItem]) -> Void) {}
+    
     public let thumbnail: Artwork?
     public let displayTitle: String
     public let displaySubtitle: String?
