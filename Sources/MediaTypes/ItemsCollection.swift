@@ -1,15 +1,12 @@
-//
-//  ItemsCollection.swift
-//  Remote for HEOS
-//
-//  Created by Dariusz Niklewicz on 17/09/2021.
 //  Copyright © 2021 Dariusz Niklewicz. All rights reserved.
-//
 
 import Combine
 import Foundation
 
 public struct ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsContainer {
+    public var typeString: String? { nil }
+    public var metadata: MediaItemMetadata? { nil }
+    
     public var searchCriteria: [SearchCriteria] = []
     public func search(for keyword: String, using: SearchCriteria, callback: @escaping ([MediaItem]) -> Void) {}
     
@@ -46,6 +43,9 @@ public struct ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCo
 }
 
 public struct PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: PlayableMediaItemsContainer {
+    public var typeString: String? { nil }
+    public var metadata: MediaItemMetadata? { nil }
+    
     public var searchCriteria: [SearchCriteria] = []
     public func search(for keyword: String, using: SearchCriteria, callback: @escaping ([MediaItem]) -> Void) {}
     
