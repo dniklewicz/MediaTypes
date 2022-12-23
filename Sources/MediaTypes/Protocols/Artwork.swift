@@ -10,4 +10,13 @@ import SwiftUI
 public enum Artwork {
     case image(Image)
     case url(URL)
+    
+    public var url: URL? {
+        switch self {
+        case let .url(url):
+            return url
+        default:
+            return nil
+        }
+    }
 }

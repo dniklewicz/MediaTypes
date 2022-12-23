@@ -36,6 +36,7 @@ public protocol MediaItemsContainer: MediaItem {
     var isAvailable: Bool { get }
     var itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void) { get }
     var searchCriteria: [SearchCriteria] { get }
+    
     func search(
         for keyword: String,
         using: SearchCriteria,

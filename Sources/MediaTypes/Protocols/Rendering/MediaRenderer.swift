@@ -5,8 +5,11 @@ import Foundation
 public protocol MediaRenderer: Identifiable
 where ID: Codable {
     associatedtype MediaItemType: MediaItem
+    associatedtype QueuedItemType: QueuedItem
     
     var name: String { get }
+    var model: String { get }
+    var ipAddress: String { get }
     
     var playState: PlayState { get }
     var playStatePublished: Published<PlayState> { get }
@@ -44,47 +47,35 @@ where ID: Codable {
     var currentTrackPublished: Published<MediaItemType?> { get }
     var currentTrackPublisher: Published<MediaItemType?>.Publisher { get }
     
+    var playQueue: [QueuedItemType] { get }
+    var playQueuePublished: Published<[QueuedItemType]> { get }
+    var playQueuePublisher: Published<[QueuedItemType]>.Publisher { get }
+    
+    var progress: PlaybackProgress? { get }
+    var progressPublished: Published<PlaybackProgress?> { get }
+    var progressPublisher: Published<PlaybackProgress?>.Publisher { get }
+    
+    var treble: Int { get }
+    var treblePublished: Published<Int> { get }
+    var treblePublisher: Published<Int>.Publisher { get }
+    
+    var bass: Int { get }
+    var bassPublished: Published<Int> { get }
+    var bassPublisher: Published<Int>.Publisher { get }
+    
     func play(item: Playable)
     func set(volume: Int)
     func set(mute: Bool)
     func set(playState: PlayState)
     func set(zoneVolume: Int)
     func set(zoneMute: Bool)
+    func set(treble: Int)
+    func set(bass: Int)
     func toggleRepeatMode()
     func toggleShuffleMode()
     func playNext()
     func playPrevious()
-}
-
-public enum MediaRenderingGroupMemberRole: String, Codable {
-    case leader = "leader"
-    case member = "member"
-}
-
-public protocol MediaRenderingGroupMember<Renderer>: Codable {
-    associatedtype Renderer: MediaRenderer
-    var id: Renderer.ID { get }
-    var role: MediaRenderingGroupMemberRole { get }
-}
-
-public protocol MediaRenderingGroup<Member>: Identifiable {
-    associatedtype Renderer: GroupableMediaRenderer
-    associatedtype Member: MediaRenderingGroupMember<Renderer>
     
-    var name: String { get }
-    // All members with leader at first index.
-    var members: [Member] { get }
-}
-
-public extension MediaRenderingGroup {
-    var leaderId: Renderer.ID? { members.first { $0.role == .leader }?.id }
-}
-
-public protocol GroupableMediaRenderer: MediaRenderer {
-    associatedtype RenderingGroup: MediaRenderingGroup
-    where Self.ID == RenderingGroup.Renderer.ID
-    
-    var group: RenderingGroup? { get }
-    var groupPublished: Published<RenderingGroup?> { get }
-    var groupPublisher: Published<RenderingGroup?>.Publisher { get }
+    func updateQueue()
+    func play(queuedItem: QueuedItemType)
 }

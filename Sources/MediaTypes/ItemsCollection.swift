@@ -3,11 +3,14 @@
 import Combine
 import Foundation
 
-public struct ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsContainer {
+public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsContainer {
     public var typeString: String? { nil }
     public var metadata: MediaItemMetadata? { nil }
     
-    public var searchCriteria: [SearchCriteria] = []
+    @Published public var searchCriteria: [SearchCriteria] = []
+    public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
+    public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
+    
     public func search(for keyword: String, using: SearchCriteria, callback: @escaping ([MediaItem]) -> Void) {}
     
     public let thumbnail: Artwork?
@@ -42,11 +45,14 @@ public struct ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCo
     }
 }
 
-public struct PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: PlayableMediaItemsContainer {
+public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: PlayableMediaItemsContainer {
     public var typeString: String? { nil }
     public var metadata: MediaItemMetadata? { nil }
     
-    public var searchCriteria: [SearchCriteria] = []
+    @Published public var searchCriteria: [SearchCriteria] = []
+    public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
+    public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
+    
     public func search(for keyword: String, using: SearchCriteria, callback: @escaping ([MediaItem]) -> Void) {}
     
     public let thumbnail: Artwork?
