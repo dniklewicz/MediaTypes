@@ -19,22 +19,19 @@ struct MockGroup: MediaRenderingGroup {
 }
 
 struct MockQueuedItem: QueuedItem {
-    var position: Int
+    var id: NSNumber
     var title: String
     var artist: String?
     var album: String?
     var artwork: MediaTypes.Artwork?
     
-    init(position: Int, title: String, artist: String?, album: String?, artwork: Artwork?) {
-        self.id = position
-        self.position = position
+    init(id: NSNumber, title: String, artist: String?, album: String?, artwork: Artwork?) {
+        self.id = id
         self.title = title
         self.artist = artist
         self.album = album
         self.artwork = artwork
     }
-    
-    var id: Int
 }
 
 struct MockItemType: MediaItem {
@@ -119,6 +116,7 @@ class MockPlayer: GroupableMediaRenderer {
     func createGroup(withMembers members: [ID]) {}
     func addToGroup(member: ID) {}
     func leaveGroup() {}
+    func addToQueue(item: MediaItem) {}
     
     let id: Int
     @Published var group: MockGroup?

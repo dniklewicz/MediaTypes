@@ -77,5 +77,6 @@ where ID: Codable {
     func playPrevious()
     
     func updateQueue()
+    func addToQueue(item: MediaItem)
     func play(queuedItem: QueuedItemType)
 }
