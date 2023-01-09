@@ -2,30 +2,30 @@
 
 import Foundation
 
-struct MockGroupMember: MediaRenderingGroupMember {
-    typealias Renderer = MockPlayer
+public struct MockGroupMember: MediaRenderingGroupMember {
+    public typealias Renderer = MockPlayer
     
-    var role: MediaRenderingGroupMemberRole
-    var id: MockPlayer.ID
+    public var role: MediaRenderingGroupMemberRole
+    public var id: MockPlayer.ID
 }
 
-struct MockGroup: MediaRenderingGroup {
-    typealias Renderer = MockGroupMember.Renderer
-    typealias Member = MockGroupMember
+public struct MockGroup: MediaRenderingGroup {
+    public typealias Renderer = MockGroupMember.Renderer
+    public typealias Member = MockGroupMember
     
-    var name: String
-    var id: Int
-    var members: [MockGroupMember]
+    public var name: String
+    public var id: Int
+    public var members: [MockGroupMember]
 }
 
-struct MockQueuedItem: QueuedItem {
-    var id: NSNumber
-    var title: String
-    var artist: String?
-    var album: String?
-    var artwork: MediaTypes.Artwork?
+public struct MockQueuedItem: QueuedItem {
+    public var id: NSNumber
+    public var title: String
+    public var artist: String?
+    public var album: String?
+    public var artwork: MediaTypes.Artwork?
     
-    init(id: NSNumber, title: String, artist: String?, album: String?, artwork: Artwork?) {
+    public init(id: NSNumber, title: String, artist: String?, album: String?, artwork: Artwork?) {
         self.id = id
         self.title = title
         self.artist = artist
@@ -34,100 +34,100 @@ struct MockQueuedItem: QueuedItem {
     }
 }
 
-struct MockItemType: MediaItem {
-    var thumbnail: Artwork?
-    var displayTitle: String
-    var displaySubtitle: String?
-    var metadata: MediaItemMetadata?
-    var typeString: String?
+public struct MockItemType: MediaItem {
+    public var thumbnail: Artwork?
+    public var displayTitle: String
+    public var displaySubtitle: String?
+    public var metadata: MediaItemMetadata?
+    public var typeString: String?
 }
 
-class MockPlayer: GroupableMediaRenderer {
-    var name: String
-    var model: String
-    var ipAddress: String = ""
+public class MockPlayer: GroupableMediaRenderer {
+    public var name: String
+    public var model: String
+    public var ipAddress: String = ""
     
-    @Published var playState: PlayState = .stop
-    var playStatePublished: Published<PlayState> { _playState }
-    var playStatePublisher: Published<PlayState>.Publisher { $playState }
+    @Published public var playState: PlayState = .stop
+    public var playStatePublished: Published<PlayState> { _playState }
+    public var playStatePublisher: Published<PlayState>.Publisher { $playState }
     
-    @Published var volume: Int = 10
-    var volumePublished: Published<Int> { _volume }
-    var volumePublisher: Published<Int>.Publisher { $volume }
+    @Published public var volume: Int = 10
+    public var volumePublished: Published<Int> { _volume }
+    public var volumePublisher: Published<Int>.Publisher { $volume }
     
-    @Published var mute: Bool = false
-    var mutePublished: Published<Bool> { _mute }
-    var mutePublisher: Published<Bool>.Publisher { $mute }
+    @Published public var mute: Bool = false
+    public var mutePublished: Published<Bool> { _mute }
+    public var mutePublisher: Published<Bool>.Publisher { $mute }
     
-    @Published var zoneVolume: Int = 10
-    var zoneVolumePublished: Published<Int> { _zoneVolume }
-    var zoneVolumePublisher: Published<Int>.Publisher { $zoneVolume }
+    @Published public var zoneVolume: Int = 10
+    public var zoneVolumePublished: Published<Int> { _zoneVolume }
+    public var zoneVolumePublisher: Published<Int>.Publisher { $zoneVolume }
     
-    @Published var zoneMute: Bool = false
-    var zoneMutePublished: Published<Bool> { _zoneMute }
-    var zoneMutePublisher: Published<Bool>.Publisher { $zoneMute }
+    @Published public var zoneMute: Bool = false
+    public var zoneMutePublished: Published<Bool> { _zoneMute }
+    public var zoneMutePublisher: Published<Bool>.Publisher { $zoneMute }
     
-    @Published var availableActions: [PlaybackAction] = []
-    var availableActionsPublished: Published<[PlaybackAction]> { _availableActions }
-    var availableActionsPublisher: Published<[PlaybackAction]>.Publisher { $availableActions }
+    @Published public var availableActions: [PlaybackAction] = []
+    public var availableActionsPublished: Published<[PlaybackAction]> { _availableActions }
+    public var availableActionsPublisher: Published<[PlaybackAction]>.Publisher { $availableActions }
     
-    @Published var repeatMode: RepeatMode = .off
-    var repeatModePublished: Published<RepeatMode> { _repeatMode }
-    var repeatModePublisher: Published<RepeatMode>.Publisher { $repeatMode }
+    @Published public var repeatMode: RepeatMode = .off
+    public var repeatModePublished: Published<RepeatMode> { _repeatMode }
+    public var repeatModePublisher: Published<RepeatMode>.Publisher { $repeatMode }
     
-    @Published var shuffleMode: ShuffleMode = .off
-    var shuffleModePublished: Published<ShuffleMode> { _shuffleMode }
-    var shuffleModePublisher: Published<ShuffleMode>.Publisher { $shuffleMode }
+    @Published public var shuffleMode: ShuffleMode = .off
+    public var shuffleModePublished: Published<ShuffleMode> { _shuffleMode }
+    public var shuffleModePublisher: Published<ShuffleMode>.Publisher { $shuffleMode }
     
-    @Published var currentTrack: MockItemType?
-    var currentTrackPublished: Published<MockItemType?> { _currentTrack }
-    var currentTrackPublisher: Published<MockItemType?>.Publisher { $currentTrack }
+    @Published public var currentTrack: MockItemType?
+    public var currentTrackPublished: Published<MockItemType?> { _currentTrack }
+    public var currentTrackPublisher: Published<MockItemType?>.Publisher { $currentTrack }
     
-    @Published var progress: PlaybackProgress?
-    var progressPublished: Published<PlaybackProgress?> { _progress }
-    var progressPublisher: Published<PlaybackProgress?>.Publisher { $progress}
+    @Published public var progress: PlaybackProgress?
+    public var progressPublished: Published<PlaybackProgress?> { _progress }
+    public var progressPublisher: Published<PlaybackProgress?>.Publisher { $progress}
     
-    @Published var treble: Int = 5
-    var treblePublished: Published<Int> { _treble }
-    var treblePublisher: Published<Int>.Publisher { $treble }
+    @Published public var treble: Int = 5
+    public var treblePublished: Published<Int> { _treble }
+    public var treblePublisher: Published<Int>.Publisher { $treble }
     
-    @Published var bass: Int = 5
-    var bassPublished: Published<Int> { _bass }
-    var bassPublisher: Published<Int>.Publisher { $bass }
+    @Published public var bass: Int = 5
+    public var bassPublished: Published<Int> { _bass }
+    public var bassPublisher: Published<Int>.Publisher { $bass }
 
-    func play(item: Playable) {}
-    func set(volume: Int) {}
-    func set(mute: Bool) {}
-    func set(playState: PlayState) {}
-    func set(zoneVolume: Int) {}
-    func set(zoneMute: Bool) {}
-    func set(treble: Int) {}
-    func set(bass: Int) {}
-    func toggleRepeatMode() {}
-    func toggleShuffleMode() {}
-    func playNext() {}
-    func playPrevious() {}
-    func updateQueue() {}
-    func play(queuedItem: MockQueuedItem) {}
+    public func play(item: Playable) {}
+    public func set(volume: Int) {}
+    public func set(mute: Bool) {}
+    public func set(playState: PlayState) {}
+    public func set(zoneVolume: Int) {}
+    public func set(zoneMute: Bool) {}
+    public func set(treble: Int) {}
+    public func set(bass: Int) {}
+    public func toggleRepeatMode() {}
+    public func toggleShuffleMode() {}
+    public func playNext() {}
+    public func playPrevious() {}
+    public func updateQueue() {}
+    public func play(queuedItem: MockQueuedItem) {}
     
-    typealias MediaItemType = MockItemType
-    typealias QueuedItemType = MockQueuedItem
+    public typealias MediaItemType = MockItemType
+    public typealias QueuedItemType = MockQueuedItem
     
-    func createGroup(withMembers members: [ID]) {}
-    func addToGroup(member: ID) {}
-    func leaveGroup() {}
-    func addToQueue(item: MediaItem) {}
+    public func createGroup(withMembers members: [ID]) {}
+    public func addToGroup(member: ID) {}
+    public func leaveGroup() {}
+    public func addToQueue(item: MediaItem) {}
     
-    let id: Int
-    @Published var group: MockGroup?
-    var groupPublished: Published<MockGroup?> { _group }
-    var groupPublisher: Published<MockGroup?>.Publisher { $group }
+    public let id: Int
+    @Published public var group: MockGroup?
+    public var groupPublished: Published<MockGroup?> { _group }
+    public var groupPublisher: Published<MockGroup?>.Publisher { $group }
     
-    @Published var playQueue: [MockQueuedItem] = []
-    var playQueuePublished: Published<[MockQueuedItem]> { _playQueue }
-    var playQueuePublisher: Published<[MockQueuedItem]>.Publisher { $playQueue }
+    @Published public var playQueue: [MockQueuedItem] = []
+    public var playQueuePublished: Published<[MockQueuedItem]> { _playQueue }
+    public var playQueuePublisher: Published<[MockQueuedItem]>.Publisher { $playQueue }
     
-    init(
+    public init(
         id: Int,
         name: String,
         model: String
@@ -138,14 +138,19 @@ class MockPlayer: GroupableMediaRenderer {
     }
 }
 
-class MockManager: GroupableMediaRenderersManager {
-    typealias Renderer = MockPlayer
+public class MockManager: GroupableMediaRenderersManager {
+    public typealias Renderer = MockPlayer
 
-    @Published var renderers: [MockPlayer] = []
-    var renderersPublished: Published<[MockPlayer]> { _renderers }
-    var renderersPublisher: Published<[MockPlayer]>.Publisher { $renderers }
+    @Published public var renderers: [MockPlayer]
+    public var renderersPublished: Published<[MockPlayer]> { _renderers }
+    public var renderersPublisher: Published<[MockPlayer]>.Publisher { $renderers }
     
-    @Published var groups: [MockGroup] = []
-    var groupsPublished: Published<[MockGroup]> { _groups }
-    var groupsPublisher: Published<[MockGroup]>.Publisher { $groups }
+    @Published public var groups: [MockGroup]
+    public var groupsPublished: Published<[MockGroup]> { _groups }
+    public var groupsPublisher: Published<[MockGroup]>.Publisher { $groups }
+    
+    public init(renderers: [MockPlayer] = [], groups: [MockGroup] = []) {
+        self.renderers = renderers
+        self.groups = groups
+    }
 }
