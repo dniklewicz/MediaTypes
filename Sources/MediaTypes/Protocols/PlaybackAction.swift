@@ -2,7 +2,7 @@
 
 import Foundation
 
-public enum PlaybackAction {
+public enum PlaybackAction: CaseIterable {
     case play
     case stop
     case pause

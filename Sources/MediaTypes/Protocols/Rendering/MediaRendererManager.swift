@@ -11,6 +11,8 @@ public protocol MediaRenderersManager {
     
     func renderer(withName name: String) -> Renderer?
     func renderer(withId id: Renderer.ID) -> Renderer?
+    
+    func process(deviceDescription: String, ipAddress: String, port: Int) -> Bool
 }
 
 public extension MediaRenderersManager {

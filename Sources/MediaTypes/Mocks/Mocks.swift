@@ -42,7 +42,7 @@ public struct MockItemType: MediaItem {
     public var typeString: String?
 }
 
-public class MockPlayer: GroupableMediaRenderer {
+public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public var name: String
     public var model: String
     public var ipAddress: String = ""
@@ -87,13 +87,14 @@ public class MockPlayer: GroupableMediaRenderer {
     public var progressPublished: Published<PlaybackProgress?> { _progress }
     public var progressPublisher: Published<PlaybackProgress?>.Publisher { $progress}
     
-    @Published public var treble: Int = 5
-    public var treblePublished: Published<Int> { _treble }
-    public var treblePublisher: Published<Int>.Publisher { $treble }
-    
-    @Published public var bass: Int = 5
-    public var bassPublished: Published<Int> { _bass }
-    public var bassPublisher: Published<Int>.Publisher { $bass }
+    @Published public var speakerSettings: [IntegerSpeakerSetting] = {
+        [
+            IntegerSpeakerSetting(id: "bass", name: "Bass", value: 5, range: (0...10), step: 1),
+            IntegerSpeakerSetting(id: "treble", name: "Treble", value: 5, range: (0...10), step: 1)
+        ]
+    }()
+    public var speakerSettingsPublished: Published<[IntegerSpeakerSetting]> { _speakerSettings }
+    public var speakerSettingsPublisher: Published<[IntegerSpeakerSetting]>.Publisher { $speakerSettings }
 
     public func play(item: Playable) {}
     public func set(volume: Int) {}
@@ -101,8 +102,7 @@ public class MockPlayer: GroupableMediaRenderer {
     public func set(playState: PlayState) {}
     public func set(zoneVolume: Int) {}
     public func set(zoneMute: Bool) {}
-    public func set(treble: Int) {}
-    public func set(bass: Int) {}
+    public func set(value: Int, for: IntegerSpeakerSetting) async throws {}
     public func toggleRepeatMode() {}
     public func toggleShuffleMode() {}
     public func playNext() {}
@@ -117,6 +117,9 @@ public class MockPlayer: GroupableMediaRenderer {
     public func addToGroup(member: ID) {}
     public func leaveGroup() {}
     public func addToQueue(item: MediaItem) {}
+    public func updateState() {}
+    public func startUpdates() {}
+    public func stopUpdates() {}
     
     public let id: Int
     @Published public var group: MockGroup?
@@ -153,4 +156,6 @@ public class MockManager: GroupableMediaRenderersManager {
         self.renderers = renderers
         self.groups = groups
     }
+    
+    public func process(deviceDescription: String, ipAddress: String, port: Int) -> Bool { false }
 }

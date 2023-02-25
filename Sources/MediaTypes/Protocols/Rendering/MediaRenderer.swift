@@ -2,10 +2,83 @@
 
 import Foundation
 
+public protocol PlayQueueProviding {
+    associatedtype QueuedItemType: QueuedItem
+    
+    var playQueue: [QueuedItemType] { get }
+    var playQueuePublished: Published<[QueuedItemType]> { get }
+    var playQueuePublisher: Published<[QueuedItemType]>.Publisher { get }
+    
+    func updateQueue()
+    func addToQueue(item: MediaItem)
+    func play(queuedItem: QueuedItemType)
+}
+
+public enum PowerState {
+    case on, off, standby
+}
+
+public protocol PowerStateProviding {
+    var powerState: PowerState { get }
+    var powerStatePublished: Published<PowerState> { get }
+    var powerStatePublisher: Published<PowerState>.Publisher { get }
+    
+    func set(powerState: PowerState) async
+}
+
+public protocol SpeakerSettingType {}
+extension String: SpeakerSettingType {}
+extension Int: NumericalSpeakerSettingType {}
+extension Double: NumericalSpeakerSettingType {}
+
+public protocol SpeakerSetting<SettingType>: Identifiable {
+    associatedtype SettingType: SpeakerSettingType
+    
+    var name: String { get }
+    var value: SettingType { get set }
+}
+
+public protocol NumericalSpeakerSettingType: SpeakerSettingType, SignedNumeric, Comparable {}
+public struct EnumerationSpeakerSetting: SpeakerSetting {
+    public var name: String
+    public var id: String
+    public var value: String
+    
+    let cases: [String]
+}
+
+public protocol NumericalSpeakerSettingProtocol<SettingType>: SpeakerSetting
+where SettingType: NumericalSpeakerSettingType {
+    var range: ClosedRange<SettingType> { get }
+    var step: SettingType { get }
+}
+
+public struct IntegerSpeakerSetting: NumericalSpeakerSettingProtocol {
+    public var id: String
+    public var name: String
+    public var value: Int
+    public var range: ClosedRange<Int>
+    public var step: Int
+    
+    init(id: String, name: String, value: Int, range: ClosedRange<Int>, step: Int) {
+        self.id = id
+        self.name = name
+        self.value = value
+        self.range = range
+        self.step = step
+    }
+}
+
+//public struct SpeakerSetting<T: SpeakerSettingType>: Identifiable {
+//    public let id: String
+//    public let name: String
+//    public let value: T
+//}
+
 public protocol MediaRenderer: Identifiable
 where ID: Codable {
     associatedtype MediaItemType: MediaItem
-    associatedtype QueuedItemType: QueuedItem
+    associatedtype SettingType: SpeakerSetting
     
     var name: String { get }
     var model: String { get }
@@ -23,14 +96,6 @@ where ID: Codable {
     var mutePublished: Published<Bool> { get }
     var mutePublisher: Published<Bool>.Publisher { get }
     
-    var zoneVolume: Int { get }
-    var zoneVolumePublished: Published<Int> { get }
-    var zoneVolumePublisher: Published<Int>.Publisher { get }
-    
-    var zoneMute: Bool { get }
-    var zoneMutePublished: Published<Bool> { get }
-    var zoneMutePublisher: Published<Bool>.Publisher { get }
-    
     var availableActions: [PlaybackAction] { get }
     var availableActionsPublished: Published<[PlaybackAction]> { get }
     var availableActionsPublisher: Published<[PlaybackAction]>.Publisher { get }
@@ -47,36 +112,24 @@ where ID: Codable {
     var currentTrackPublished: Published<MediaItemType?> { get }
     var currentTrackPublisher: Published<MediaItemType?>.Publisher { get }
     
-    var playQueue: [QueuedItemType] { get }
-    var playQueuePublished: Published<[QueuedItemType]> { get }
-    var playQueuePublisher: Published<[QueuedItemType]>.Publisher { get }
-    
     var progress: PlaybackProgress? { get }
     var progressPublished: Published<PlaybackProgress?> { get }
     var progressPublisher: Published<PlaybackProgress?>.Publisher { get }
     
-    var treble: Int { get }
-    var treblePublished: Published<Int> { get }
-    var treblePublisher: Published<Int>.Publisher { get }
+    var speakerSettings: [SettingType] { get }
+    var speakerSettingsPublished: Published<[SettingType]> { get }
+    var speakerSettingsPublisher: Published<[SettingType]>.Publisher { get }
     
-    var bass: Int { get }
-    var bassPublished: Published<Int> { get }
-    var bassPublisher: Published<Int>.Publisher { get }
-    
-    func play(item: Playable)
-    func set(volume: Int)
-    func set(mute: Bool)
-    func set(playState: PlayState)
-    func set(zoneVolume: Int)
-    func set(zoneMute: Bool)
-    func set(treble: Int)
-    func set(bass: Int)
-    func toggleRepeatMode()
-    func toggleShuffleMode()
-    func playNext()
-    func playPrevious()
-    
-    func updateQueue()
-    func addToQueue(item: MediaItem)
-    func play(queuedItem: QueuedItemType)
+    func play(item: Playable) async throws
+    func set(volume: Int) async throws
+    func set(mute: Bool) async throws
+    func set(playState: PlayState) async throws
+    func set(value: SettingType.SettingType, for: SettingType) async throws
+    func toggleRepeatMode() async throws
+    func toggleShuffleMode() async throws
+    func playNext() async throws
+    func playPrevious() async throws
+    func updateState() async throws
+    func startUpdates() async throws
+    func stopUpdates() async throws
 }
