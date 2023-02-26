@@ -9,7 +9,7 @@ public protocol PlayQueueProviding {
     var playQueuePublished: Published<[QueuedItemType]> { get }
     var playQueuePublisher: Published<[QueuedItemType]>.Publisher { get }
     
-    func updateQueue()
+    func updateQueue() async throws
     func addToQueue(item: MediaItem)
     func play(queuedItem: QueuedItemType)
 }
