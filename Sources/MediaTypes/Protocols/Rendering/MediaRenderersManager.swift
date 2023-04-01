@@ -6,7 +6,6 @@ public protocol MediaRenderersManager {
     associatedtype Renderer: MediaRenderer
     
     var renderers: [Renderer] { get }
-    var renderersPublished: Published<[Renderer]> { get }
     var renderersPublisher: Published<[Renderer]>.Publisher { get }
     
     func renderer(withName name: String) -> Renderer?
@@ -30,6 +29,5 @@ public protocol GroupableMediaRenderersManager: MediaRenderersManager where Rend
     where Group.Renderer == Renderer
     
     var groups: [Group] { get }
-    var groupsPublished: Published<[Group]> { get }
     var groupsPublisher: Published<[Group]>.Publisher { get }
 }

@@ -11,7 +11,7 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
     public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
     public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
     
-    public func search(for keyword: String, using: SearchCriteria, callback: @escaping ([MediaItem]) -> Void) {}
+    public func search(for keyword: String, using: SearchCriteria) async throws -> [MediaItem] { [] }
     
     public let thumbnail: Artwork?
     public let displayTitle: String
@@ -52,8 +52,7 @@ public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: Playa
     @Published public var searchCriteria: [SearchCriteria] = []
     public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
     public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
-    
-    public func search(for keyword: String, using: SearchCriteria, callback: @escaping ([MediaItem]) -> Void) {}
+    public func search(for keyword: String, using: SearchCriteria) async throws -> [MediaItem] { [] }
     
     public let thumbnail: Artwork?
     public let displayTitle: String

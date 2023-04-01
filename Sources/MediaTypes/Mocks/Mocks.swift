@@ -87,14 +87,17 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public var progressPublished: Published<PlaybackProgress?> { _progress }
     public var progressPublisher: Published<PlaybackProgress?>.Publisher { $progress}
     
-    @Published public var speakerSettings: [IntegerSpeakerSetting] = {
+    @Published public var speakerSettings: [any SpeakerSetting] = {
         [
-            IntegerSpeakerSetting(id: "bass", name: "Bass", value: 5, range: (0...10), step: 1),
-            IntegerSpeakerSetting(id: "treble", name: "Treble", value: 5, range: (0...10), step: 1)
+            DoubleSpeakerSetting(id: "bass", name: "Bass", value: 5, range: (0...10), step: 1),
+            DoubleSpeakerSetting(id: "mid", name: "Mid", value: 5, range: (0...10), step: 1),
+            DoubleSpeakerSetting(id: "treble", name: "Treble", value: 5, range: (0...10), step: 1),
+            BooleanSpeakerSetting(id: "enhancer", name: "Enhancer", value: false),
+            EnumerationSpeakerSetting(name: "Preset", id: "preset", value: "manual", cases: ["manual", "auto"])
         ]
     }()
-    public var speakerSettingsPublished: Published<[IntegerSpeakerSetting]> { _speakerSettings }
-    public var speakerSettingsPublisher: Published<[IntegerSpeakerSetting]>.Publisher { $speakerSettings }
+    public var speakerSettingsPublished: Published<[any SpeakerSetting]> { _speakerSettings }
+    public var speakerSettingsPublisher: Published<[any SpeakerSetting]>.Publisher { $speakerSettings }
 
     public func play(item: Playable) {}
     public func set(volume: Int) {}
@@ -102,7 +105,8 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public func set(playState: PlayState) {}
     public func set(zoneVolume: Int) {}
     public func set(zoneMute: Bool) {}
-    public func set(value: Int, for: IntegerSpeakerSetting) async throws {}
+    public func set(value: Int, for: DoubleSpeakerSetting) async throws {}
+    public func set<T>(value: T.SettingType, for: T) async throws where T : SpeakerSetting {}
     public func toggleRepeatMode() {}
     public func toggleShuffleMode() {}
     public func playNext() {}
@@ -158,4 +162,21 @@ public class MockManager: GroupableMediaRenderersManager {
     }
     
     public func process(deviceDescription: String, ipAddress: String, port: Int) -> Bool { false }
+}
+
+public class PowerableMockPlayer: MockPlayer, PowerStateProviding {
+    @Published public var powerState: PowerState
+    public var powerStatePublished: Published<PowerState> { _powerState }
+    public var powerStatePublisher: Published<PowerState>.Publisher { $powerState }
+    public func set(powerState: PowerState) async throws {}
+    
+    public init(
+        powerState: PowerState,
+        id: Int,
+        name: String,
+        model: String
+    ) {
+        self.powerState = powerState
+        super.init(id: id, name: name, model: model)
+    }
 }
