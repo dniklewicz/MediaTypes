@@ -10,7 +10,7 @@ extension Double: NumericalSpeakerSettingType {}
 
 public protocol SpeakerSetting<SettingType>: Identifiable {
     associatedtype SettingType: SpeakerSettingType
-    
+
     var id: String { get }
     var name: String { get }
     var value: SettingType { get set }
@@ -21,9 +21,9 @@ public struct EnumerationSpeakerSetting: SpeakerSetting {
     public var name: String
     public var id: String
     public var value: String
-    
+
     public let cases: [String]
-    
+
     public init(name: String, id: String, value: String, cases: [String]) {
         self.name = name
         self.id = id
@@ -43,7 +43,7 @@ public struct BooleanSpeakerSetting: SpeakerSetting {
     public var id: String
     public var name: String
     public var value: Bool
-    
+
     public init(id: String, name: String, value: Bool) {
         self.id = id
         self.name = name
@@ -57,7 +57,7 @@ public struct DoubleSpeakerSetting: NumericalSpeakerSettingProtocol {
     public var value: Double
     public var range: ClosedRange<Double>
     public var step: Double
-    
+
     public init(id: String, name: String, value: Double, range: ClosedRange<Double>, step: Double) {
         self.id = id
         self.name = name

@@ -5,7 +5,7 @@ import Foundation
 public protocol MediaRenderingGroup<Member>: Identifiable {
     associatedtype Renderer: GroupableMediaRenderer
     associatedtype Member: MediaRenderingGroupMember<Renderer>
-    
+
     var name: String { get }
     // All members with leader at first index.
     var members: [Member] { get }

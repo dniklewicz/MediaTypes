@@ -6,7 +6,7 @@ public enum RepeatMode: String, CaseIterable {
     case all = "on_all"
     case one = "on_one"
     case off
-    
+
     public var displayString: String {
         switch self {
         case .all: return "ALL"
@@ -14,7 +14,7 @@ public enum RepeatMode: String, CaseIterable {
         case .off: return "OFF"
         }
     }
-    
+
     public func next() -> RepeatMode {
         switch self {
         case .all: return .one
@@ -27,11 +27,11 @@ public enum RepeatMode: String, CaseIterable {
 public enum ShuffleMode: String, CaseIterable {
     case on
     case off
-    
+
     public var displayString: String {
         return rawValue.uppercased()
     }
-    
+
     public func next() -> ShuffleMode {
         switch self {
         case .on: return .off

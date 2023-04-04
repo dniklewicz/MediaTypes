@@ -4,7 +4,7 @@ import Foundation
 
 public protocol MediaSearchCriteria: Identifiable, Hashable {
     var name: String { get }
-    
+
     init()
 }
 
@@ -18,20 +18,20 @@ extension MediaSearchCriteria {
 public struct NotSearchableCriteria: MediaSearchCriteria {
     public var name: String { "Not searchable" }
     public var id: Int { 0 }
-    
+
     public init() {}
 }
 
 public protocol MediaItemsContainer: MediaItem {
     associatedtype SearchCriteria: MediaSearchCriteria
-    
+
     var thumbnail: Artwork? { get }
     var displayTitle: String { get }
     var displaySubtitle: String? { get }
     var isAvailable: Bool { get }
     var itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void) { get }
     var searchCriteria: [SearchCriteria] { get }
-    
+
     func search(
         for keyword: String,
         using: SearchCriteria
@@ -42,7 +42,7 @@ public extension MediaItemsContainer {
     var isAvailable: Bool {
         true
     }
-    
+
     var searchable: Bool {
         searchCriteria.count > 0
     }

@@ -6,18 +6,18 @@ import Foundation
 public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsContainer {
     public var typeString: String? { nil }
     public var metadata: MediaItemMetadata? { nil }
-    
+
     @Published public var searchCriteria: [SearchCriteria] = []
     public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
     public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
-    
+
     public func search(for keyword: String, using: SearchCriteria) async throws -> [MediaItem] { [] }
-    
+
     public let thumbnail: Artwork?
     public let displayTitle: String
     public let displaySubtitle: String?
     public let itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void)
-    
+
     public init(
         displayTitle: String,
         displaySubtitle: String? = nil,
@@ -29,7 +29,7 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
         self.thumbnail = thumbnail
         self.itemsProvider = itemsProvider
     }
-    
+
     public init(
         displayTitle: String,
         displaySubtitle: String? = nil,
@@ -48,17 +48,17 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
 public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: PlayableMediaItemsContainer {
     public var typeString: String? { nil }
     public var metadata: MediaItemMetadata? { nil }
-    
+
     @Published public var searchCriteria: [SearchCriteria] = []
     public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
     public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
     public func search(for keyword: String, using: SearchCriteria) async throws -> [MediaItem] { [] }
-    
+
     public let thumbnail: Artwork?
     public let displayTitle: String
     public let displaySubtitle: String?
     public let itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void)
-    
+
     public init(
         displayTitle: String,
         displaySubtitle: String? = nil,
@@ -70,7 +70,7 @@ public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: Playa
         self.thumbnail = thumbnail
         self.itemsProvider = itemsProvider
     }
-    
+
     public init(
         displayTitle: String,
         displaySubtitle: String? = nil,

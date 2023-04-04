@@ -3,5 +3,5 @@
 import Foundation
 
 public protocol Playable {
-    
+
 }

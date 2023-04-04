@@ -2,11 +2,11 @@
 
 import SwiftUI
 
-public struct MediaItemMetadata {
+public struct MediaItemMetadata: Equatable {
     public let title: String
     public let artist: String?
     public let album: String?
-    
+
     public init(title: String, artist: String?, album: String?) {
         self.title = title
         self.artist = artist
@@ -20,14 +20,16 @@ public protocol MediaItem {
     var displaySubtitle: String? { get }
     var metadata: MediaItemMetadata? { get }
     var typeString: String? { get }
-    
+
     var isAvailable: Bool { get }
+    var isQueueable: Bool { get }
 }
 
 public extension MediaItem {
     var isAvailable: Bool { true }
+    var isQueueable: Bool { false }
 }
 
 public protocol PlayableMediaItem: MediaItem, Playable {
-    
+
 }

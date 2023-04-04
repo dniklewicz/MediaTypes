@@ -7,6 +7,6 @@ public protocol QueuedItem: Identifiable {
     var artist: String? { get }
     var album: String? { get }
     var artwork: Artwork? { get }
-    
+
     init(id: NSNumber, title: String, artist: String?, album: String?, artwork: Artwork?)
 }
