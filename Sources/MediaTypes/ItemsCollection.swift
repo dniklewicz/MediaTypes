@@ -17,6 +17,7 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
     public let displayTitle: String
     public let displaySubtitle: String?
     public let itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void)
+    public var isActiveContainer: Bool? { nil }
 
     public init(
         displayTitle: String,
@@ -58,6 +59,7 @@ public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: Playa
     public let displayTitle: String
     public let displaySubtitle: String?
     public let itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void)
+    public var isActiveContainer: Bool? { nil }
 
     public init(
         displayTitle: String,
