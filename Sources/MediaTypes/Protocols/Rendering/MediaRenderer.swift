@@ -12,31 +12,24 @@ where ID: Codable {
     var ipAddress: String { get }
 
     var playState: PlayState { get }
-    var playStatePublished: Published<PlayState> { get }
     var playStatePublisher: Published<PlayState>.Publisher { get }
 
     var volume: Int { get }
-    var volumePublished: Published<Int> { get }
     var volumePublisher: Published<Int>.Publisher { get }
 
     var mute: Bool { get }
-    var mutePublished: Published<Bool> { get }
     var mutePublisher: Published<Bool>.Publisher { get }
 
     var availableActions: [PlaybackAction] { get }
-    var availableActionsPublished: Published<[PlaybackAction]> { get }
     var availableActionsPublisher: Published<[PlaybackAction]>.Publisher { get }
 
     var repeatMode: RepeatMode { get }
-    var repeatModePublished: Published<RepeatMode> { get }
     var repeatModePublisher: Published<RepeatMode>.Publisher { get }
 
     var shuffleMode: ShuffleMode { get }
-    var shuffleModePublished: Published<ShuffleMode> { get }
     var shuffleModePublisher: Published<ShuffleMode>.Publisher { get }
 
     var currentTrack: MediaItemType? { get }
-    var currentTrackPublished: Published<MediaItemType?> { get }
     var currentTrackPublisher: Published<MediaItemType?>.Publisher { get }
 
     var progress: PlaybackProgress? { get }
