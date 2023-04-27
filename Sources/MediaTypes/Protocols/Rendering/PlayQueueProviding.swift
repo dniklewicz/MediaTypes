@@ -7,7 +7,6 @@ public protocol PlayQueueProviding {
     associatedtype QueuedItemType: QueuedItem
 
     var playQueue: [QueuedItemType] { get }
-    var playQueuePublished: Published<[QueuedItemType]> { get }
     var playQueuePublisher: Published<[QueuedItemType]>.Publisher { get }
 
     func updateQueue() async throws

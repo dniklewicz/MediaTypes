@@ -33,11 +33,9 @@ where ID: Codable {
     var currentTrackPublisher: Published<MediaItemType?>.Publisher { get }
 
     var progress: PlaybackProgress? { get }
-    var progressPublished: Published<PlaybackProgress?> { get }
     var progressPublisher: Published<PlaybackProgress?>.Publisher { get }
 
     var speakerSettings: [any SpeakerSetting] { get }
-    var speakerSettingsPublished: Published<[any SpeakerSetting]> { get }
     var speakerSettingsPublisher: Published<[any SpeakerSetting]>.Publisher { get }
 
     func play(item: Playable) async throws
