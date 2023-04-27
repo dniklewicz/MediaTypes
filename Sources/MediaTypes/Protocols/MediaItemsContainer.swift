@@ -35,8 +35,11 @@ public protocol MediaItemsContainer: MediaItem {
 
     func search(
         for keyword: String,
-        using: SearchCriteria
+        using: SearchCriteria,
+		isFirstSearch: Bool
     ) async throws -> [MediaItem]
+	
+	func searchWillCancel()
 }
 
 public extension MediaItemsContainer {
@@ -54,8 +57,11 @@ where SearchCriteria == NotSearchableCriteria {
     var searchCriteria: [SearchCriteria] { [] }
     func search(
         for keyword: String,
-        using: SearchCriteria
+        using: SearchCriteria,
+		isFirstSearch: Bool
     ) async throws -> [MediaItem] {
         []
     }
+	
+	func searchWillCancel() {}
 }
