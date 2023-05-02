@@ -4,7 +4,7 @@ import Combine
 import Foundation
 
 public protocol MediaRenderer: Identifiable
-where ID: Codable {
+where ID == String {
     associatedtype MediaItemType: MediaItem
 
     var name: String { get }

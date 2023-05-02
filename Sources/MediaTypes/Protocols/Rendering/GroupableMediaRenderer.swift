@@ -5,7 +5,6 @@ import Foundation
 
 public protocol GroupableMediaRenderer: MediaRenderer {
     associatedtype RenderingGroup: MediaRenderingGroup
-    where Self.ID == RenderingGroup.Renderer.ID
 
     var zoneVolume: Int { get }
     var zoneVolumePublisher: Published<Int>.Publisher { get }

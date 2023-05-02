@@ -115,7 +115,7 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public func startUpdates() {}
     public func stopUpdates() {}
 
-    public let id: Int
+    public let id: String
     @Published public var group: MockGroup?
     public var groupPublisher: Published<MockGroup?>.Publisher { $group }
 
@@ -123,7 +123,7 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public var playQueuePublisher: Published<[MockQueuedItem]>.Publisher { $playQueue }
 
     public init(
-        id: Int,
+        id: String,
         name: String,
         model: String
     ) {
@@ -157,7 +157,7 @@ public class PowerableMockPlayer: MockPlayer, PowerStateProviding {
 
     public init(
         powerState: PowerState,
-        id: Int,
+        id: String,
         name: String,
         model: String
     ) {
