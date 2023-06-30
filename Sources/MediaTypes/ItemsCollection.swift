@@ -11,20 +11,20 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
     public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
     public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
 
-	public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [MediaItem] { [] }
+	public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
 	public func searchWillCancel() {}
 
     public let thumbnail: Artwork?
     public let displayTitle: String
     public let displaySubtitle: String?
-    public let itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void)
+	public let itemsProvider: ((@escaping (([any MediaItem]) -> Void)) -> Void)
     public var isActiveContainer: Bool? { nil }
 
     public init(
         displayTitle: String,
         displaySubtitle: String? = nil,
         thumbnail: Artwork?,
-        itemsProvider: @escaping ((@escaping (([MediaItem]) -> Void)) -> Void)
+		itemsProvider: @escaping ((@escaping (([any MediaItem]) -> Void)) -> Void)
     ) {
         self.displayTitle = displayTitle
         self.displaySubtitle = displaySubtitle
@@ -36,7 +36,7 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
         displayTitle: String,
         displaySubtitle: String? = nil,
         thumbnail: Artwork?,
-        items: [MediaItem]
+		items: [any MediaItem]
     ) {
         self.displayTitle = displayTitle
         self.displaySubtitle = displaySubtitle
@@ -54,20 +54,20 @@ public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: Playa
     @Published public var searchCriteria: [SearchCriteria] = []
     public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
     public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
-	public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [MediaItem] { [] }
+	public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
 	public func searchWillCancel() {}
 
     public let thumbnail: Artwork?
     public let displayTitle: String
     public let displaySubtitle: String?
-    public let itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void)
+	public let itemsProvider: ((@escaping (([any MediaItem]) -> Void)) -> Void)
     public var isActiveContainer: Bool? { nil }
 
     public init(
         displayTitle: String,
         displaySubtitle: String? = nil,
         thumbnail: Artwork?,
-        itemsProvider: @escaping ((@escaping (([MediaItem]) -> Void)) -> Void)
+		itemsProvider: @escaping ((@escaping (([any MediaItem]) -> Void)) -> Void)
     ) {
         self.displayTitle = displayTitle
         self.displaySubtitle = displaySubtitle
@@ -79,7 +79,7 @@ public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: Playa
         displayTitle: String,
         displaySubtitle: String? = nil,
         thumbnail: Artwork?,
-        items: [MediaItem]
+		items: [any MediaItem]
     ) {
         self.displayTitle = displayTitle
         self.displaySubtitle = displaySubtitle

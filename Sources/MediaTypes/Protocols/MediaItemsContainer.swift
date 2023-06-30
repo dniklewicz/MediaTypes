@@ -29,15 +29,16 @@ public protocol MediaItemsContainer: MediaItem {
     var displayTitle: String { get }
     var displaySubtitle: String? { get }
     var isAvailable: Bool { get }
-    var itemsProvider: ((@escaping (([MediaItem]) -> Void)) -> Void) { get }
+    var itemsProvider: ((@escaping (([any MediaItem]) -> Void)) -> Void) { get }
     var searchCriteria: [SearchCriteria] { get }
     var isActiveContainer: Bool? { get }
+	var supportsItemsHiding: Bool { get }
 
     func search(
         for keyword: String,
         using: SearchCriteria,
 		isFirstSearch: Bool
-    ) async throws -> [MediaItem]
+    ) async throws -> [any MediaItem]
 	
 	func searchWillCancel()
 }
@@ -50,6 +51,8 @@ public extension MediaItemsContainer {
     var searchable: Bool {
         searchCriteria.count > 0
     }
+	
+	var supportsItemsHiding: Bool { false }
 }
 
 public extension MediaItemsContainer
@@ -59,7 +62,7 @@ where SearchCriteria == NotSearchableCriteria {
         for keyword: String,
         using: SearchCriteria,
 		isFirstSearch: Bool
-    ) async throws -> [MediaItem] {
+    ) async throws -> [any MediaItem] {
         []
     }
 	

@@ -110,7 +110,7 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public func createGroup(withMembers members: [ID]) {}
     public func addToGroup(member: ID) {}
     public func leaveGroup() {}
-    public func addToQueue(item: MediaItem) {}
+	public func addToQueue(item: any MediaItem) {}
     public func updateState() {}
     public func startUpdates() {}
     public func stopUpdates() {}

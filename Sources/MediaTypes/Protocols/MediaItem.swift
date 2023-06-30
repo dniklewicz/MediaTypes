@@ -14,7 +14,7 @@ public struct MediaItemMetadata: Equatable {
     }
 }
 
-public protocol MediaItem {
+public protocol MediaItem: Identifiable {
     var thumbnail: Artwork? { get }
     var displayTitle: String { get }
     var displaySubtitle: String? { get }
@@ -28,6 +28,7 @@ public protocol MediaItem {
 public extension MediaItem {
     var isAvailable: Bool { true }
     var isQueueable: Bool { false }
+	var id: String { displayTitle }
 }
 
 public protocol PlayableMediaItem: MediaItem, Playable {
