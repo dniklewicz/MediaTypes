@@ -3,8 +3,7 @@
 import Combine
 import Foundation
 
-public protocol MediaRenderer: Identifiable
-where ID == String {
+public protocol MediaRenderer: Identifiable {
     associatedtype MediaItemType: MediaItem
 
     var name: String { get }
