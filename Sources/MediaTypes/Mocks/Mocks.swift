@@ -123,14 +123,24 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public var playQueuePublisher: Published<[MockQueuedItem]>.Publisher { $playQueue }
 
     public init(
-        id: String,
+        id: ID,
         name: String,
-        model: String
+        model: String,
+		mediaItem: MockItemType? = nil
     ) {
         self.id = id
         self.name = name
         self.model = model
+		if mediaItem != nil {
+			self.playState = .play
+		}
+		self.currentTrack = mediaItem
     }
+}
+
+extension MockItemType {
+	static let kaczorek: MockItemType = .init(thumbnail: .image(.init("kaczorek", bundle: .module)), displayTitle: "", metadata: .init(title: "Skatepark", artist: "The Duckilings", album: nil))
+	static let bysiek: MockItemType = .init(thumbnail: .image(.init("bysiek", bundle: .module)), displayTitle: "", metadata: .init(title: "Life is a journey", artist: "Darqué", album: nil))
 }
 
 public class MockManager: GroupableMediaRenderersManager {
@@ -142,10 +152,34 @@ public class MockManager: GroupableMediaRenderersManager {
     @Published public var groups: [MockGroup]
     public var groupsPublisher: Published<[MockGroup]>.Publisher { $groups }
 
-    public init(renderers: [MockPlayer] = [], groups: [MockGroup] = []) {
+    public init(renderers: [MockPlayer], groups: [MockGroup] = []) {
         self.renderers = renderers
         self.groups = groups
     }
+	
+	public init() {
+		self.renderers = [
+			PowerableMockPlayer(id: "1", name: "Living Room", model: "Speaker 3", mediaItem: .bysiek),
+			PowerableMockPlayer(id: "2", name: "Office", model: "Speaker 5"),
+			PowerableMockPlayer(id: "3", name: "Bedroom", model: "Speaker 7", mediaItem: .kaczorek)
+		]
+		
+		self.groups = [
+			.init(name: "Living Room + Office", id: 1, members: [
+				.init(role: .leader, id: "1"),
+				.init(role: .member, id: "2")
+			])
+		]
+		
+		// Assign groups to renderers
+		for group in groups {
+			for renderer in renderers {
+				if group.members.contains(where: { $0.id == renderer.id }) {
+					renderer.group = group
+				}
+			}
+		}
+	}
 
     public func process(deviceDescription: String, ipAddress: String, port: Int) -> Bool { false }
 }
@@ -156,12 +190,13 @@ public class PowerableMockPlayer: MockPlayer, PowerStateProviding {
     public func set(powerState: PowerState) async throws {}
 
     public init(
-        powerState: PowerState,
+		powerState: PowerState = .on,
         id: String,
         name: String,
-        model: String
+        model: String,
+		mediaItem: MockItemType? = nil
     ) {
         self.powerState = powerState
-        super.init(id: id, name: name, model: model)
+		super.init(id: id, name: name, model: model, mediaItem: mediaItem)
     }
 }
