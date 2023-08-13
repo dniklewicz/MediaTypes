@@ -4,6 +4,6 @@ import Foundation
 
 public protocol MediaRenderingGroupMember<Renderer>: Codable {
     associatedtype Renderer: MediaRenderer
-    var id: Renderer.ID { get }
+    var id: String { get }
     var role: MediaRenderingGroupMemberRole { get }
 }

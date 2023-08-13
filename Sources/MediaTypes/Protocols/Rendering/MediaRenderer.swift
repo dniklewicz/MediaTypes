@@ -5,7 +5,8 @@ import Foundation
 
 public protocol MediaRenderer: Identifiable {
     associatedtype MediaItemType: MediaItem
-
+	
+	var id: String { get }
     var name: String { get }
     var model: String { get }
     var ipAddress: String { get }

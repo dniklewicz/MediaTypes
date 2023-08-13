@@ -10,7 +10,7 @@ public protocol MediaRenderersManager {
     var renderersPublisher: Published<[Renderer]>.Publisher { get }
 
     func renderer(withName name: String) -> Renderer?
-    func renderer(withId id: any Hashable) -> Renderer?
+	func renderer(withId id: String) -> Renderer?
 
     func process(deviceDescription: String, ipAddress: String, port: Int) -> Bool
 }
@@ -20,8 +20,8 @@ public extension MediaRenderersManager {
         renderers.first(where: { $0.name == name })
     }
 
-    func renderer(withId id: any Hashable) -> Renderer? {
-		renderers.first(where: { $0.id.hashValue == id.hashValue })
+	func renderer(withId id: String) -> Renderer? {
+		renderers.first(where: { $0.id == id })
     }
 }
 

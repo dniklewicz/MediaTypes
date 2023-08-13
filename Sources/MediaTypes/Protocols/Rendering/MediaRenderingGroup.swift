@@ -12,8 +12,8 @@ public protocol MediaRenderingGroup<Member>: Identifiable {
 }
 
 public extension MediaRenderingGroup {
-    var leaderId: Renderer.ID? { members.first { $0.role == .leader }?.id }
-    func role(for id: any Hashable) -> MediaRenderingGroupMemberRole? {
-		members.first { $0.id.hashValue == id.hashValue }?.role
+    var leaderId: String? { members.first { $0.role == .leader }?.id }
+	func role(for id: String) -> MediaRenderingGroupMemberRole? {
+		members.first { $0.id == id }?.role
     }
 }

@@ -115,7 +115,7 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public func startUpdates() {}
     public func stopUpdates() {}
 
-    public let id: String
+	public var id: String
     @Published public var group: MockGroup?
     public var groupPublisher: Published<MockGroup?>.Publisher { $group }
 
