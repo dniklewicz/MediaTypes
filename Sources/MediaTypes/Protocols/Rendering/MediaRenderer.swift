@@ -13,6 +13,9 @@ public protocol MediaRenderer: Identifiable {
 
     var playState: PlayState { get }
     var playStatePublisher: Published<PlayState>.Publisher { get }
+	
+	var minVolume: Double { get }
+	var maxVolume: Double { get }
 
     var volume: Int { get }
     var volumePublisher: Published<Int>.Publisher { get }

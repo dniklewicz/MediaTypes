@@ -77,6 +77,9 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
 
     @Published public var progress: PlaybackProgress?
     public var progressPublisher: Published<PlaybackProgress?>.Publisher { $progress}
+	
+	public var minVolume: Double = 0
+	public var maxVolume: Double = 60
 
     @Published public var speakerSettings: [any SpeakerSetting] = {
         [
