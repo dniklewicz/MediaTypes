@@ -2,13 +2,13 @@
 
 import Foundation
 
-public protocol SpeakerSettingType {}
+public protocol SpeakerSettingType: Equatable {}
 extension String: SpeakerSettingType {}
 extension Bool: SpeakerSettingType {}
 extension Int: NumericalSpeakerSettingType {}
 extension Double: NumericalSpeakerSettingType {}
 
-public protocol SpeakerSetting<SettingType>: Identifiable {
+public protocol SpeakerSetting<SettingType>: Identifiable, Equatable {
     associatedtype SettingType: SpeakerSettingType
 
     var id: String { get }

@@ -2,7 +2,7 @@
 
 import Foundation
 
-public protocol MediaRenderingGroup<Member>: Identifiable {
+public protocol MediaRenderingGroup<Member>: Identifiable, Equatable {
     associatedtype Renderer: GroupableMediaRenderer
     associatedtype Member: MediaRenderingGroupMember<Renderer>
 

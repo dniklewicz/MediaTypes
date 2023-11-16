@@ -2,7 +2,7 @@
 
 import Foundation
 
-public enum MediaRenderingGroupMemberRole: String, Codable {
+public enum MediaRenderingGroupMemberRole: String, Codable, Equatable {
     case leader = "leader"
     case member = "member"
 }

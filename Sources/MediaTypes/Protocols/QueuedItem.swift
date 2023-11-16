@@ -2,7 +2,7 @@
 
 import Foundation
 
-public protocol QueuedItem: Identifiable {
+public protocol QueuedItem: Identifiable, Equatable {
     var title: String { get }
     var artist: String? { get }
     var album: String? { get }

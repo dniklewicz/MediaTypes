@@ -4,15 +4,21 @@ import Combine
 import Foundation
 
 public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsContainer {
+    public static func == (lhs: ItemsCollection<SearchCriteria>, rhs: ItemsCollection<SearchCriteria>) -> Bool {
+        lhs.typeString == rhs.typeString
+        && lhs.metadata == rhs.metadata
+        && lhs.searchCriteria == rhs.searchCriteria
+        && lhs.thumbnail == rhs.thumbnail
+        && lhs.displayTitle == rhs.displayTitle
+        && lhs.displaySubtitle == rhs.displaySubtitle
+        && lhs.isActiveContainer == rhs.isActiveContainer
+    }
+    
     public var typeString: String? { nil }
     public var metadata: MediaItemMetadata? { nil }
 
     @Published public var searchCriteria: [SearchCriteria] = []
-    public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
     public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
-
-	public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
-	public func searchWillCancel() {}
 
     public let thumbnail: Artwork?
     public let displayTitle: String
@@ -45,17 +51,27 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
             result(items)
         }
     }
+    
+    public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
+    public func searchWillCancel() {}
 }
 
 public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: PlayableMediaItemsContainer {
+    public static func == (lhs: PlayableItemsCollection<SearchCriteria>, rhs: PlayableItemsCollection<SearchCriteria>) -> Bool {
+        lhs.typeString == rhs.typeString
+        && lhs.metadata == rhs.metadata
+        && lhs.searchCriteria == rhs.searchCriteria
+        && lhs.thumbnail == rhs.thumbnail
+        && lhs.displayTitle == rhs.displayTitle
+        && lhs.displaySubtitle == rhs.displaySubtitle
+        && lhs.isActiveContainer == rhs.isActiveContainer
+    }
+    
     public var typeString: String? { nil }
     public var metadata: MediaItemMetadata? { nil }
 
     @Published public var searchCriteria: [SearchCriteria] = []
-    public var searchCriteriaPublished: Published<[SearchCriteria]> { _searchCriteria }
     public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
-	public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
-	public func searchWillCancel() {}
 
     public let thumbnail: Artwork?
     public let displayTitle: String
@@ -88,4 +104,7 @@ public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: Playa
             result(items)
         }
     }
+    
+    public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
+    public func searchWillCancel() {}
 }

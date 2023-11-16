@@ -2,7 +2,7 @@
 
 import Foundation
 
-public protocol MediaRenderingGroupMember<Renderer>: Codable {
+public protocol MediaRenderingGroupMember<Renderer>: Codable, Identifiable, Equatable {
     associatedtype Renderer: MediaRenderer
     var id: String { get }
     var role: MediaRenderingGroupMemberRole { get }

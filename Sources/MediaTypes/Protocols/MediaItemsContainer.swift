@@ -2,7 +2,7 @@
 
 import Foundation
 
-public protocol MediaSearchCriteria: Identifiable, Hashable {
+public protocol MediaSearchCriteria: Identifiable, Hashable, Equatable {
     var name: String { get }
 
     init()

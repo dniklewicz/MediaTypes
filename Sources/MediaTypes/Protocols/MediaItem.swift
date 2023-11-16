@@ -14,7 +14,7 @@ public struct MediaItemMetadata: Equatable {
     }
 }
 
-public protocol MediaItem: Identifiable {
+public protocol MediaItem: Identifiable, Equatable {
     var thumbnail: Artwork? { get }
     var displayTitle: String { get }
     var displaySubtitle: String? { get }

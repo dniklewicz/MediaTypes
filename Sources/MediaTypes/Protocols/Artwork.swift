@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-public enum Artwork {
+public enum Artwork: Equatable {
     case image(Image)
     case url(URL)
 
