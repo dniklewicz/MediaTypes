@@ -2,7 +2,7 @@
 
 import Foundation
 
-public enum PlayState: String, Equatable {
+public enum PlayState: String, Hashable {
     case play
     case pause
     case stop

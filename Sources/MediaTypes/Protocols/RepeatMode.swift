@@ -2,7 +2,7 @@
 
 import Foundation
 
-public enum RepeatMode: String, CaseIterable, Equatable {
+public enum RepeatMode: String, CaseIterable, Hashable {
     case all = "on_all"
     case one = "on_one"
     case off

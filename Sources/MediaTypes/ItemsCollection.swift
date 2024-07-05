@@ -4,16 +4,16 @@ import Combine
 import Foundation
 
 public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsContainer {
-    public static func == (lhs: ItemsCollection<SearchCriteria>, rhs: ItemsCollection<SearchCriteria>) -> Bool {
-        lhs.typeString == rhs.typeString
-        && lhs.metadata == rhs.metadata
-        && lhs.searchCriteria == rhs.searchCriteria
-        && lhs.thumbnail == rhs.thumbnail
-        && lhs.displayTitle == rhs.displayTitle
-        && lhs.displaySubtitle == rhs.displaySubtitle
-        && lhs.isActiveContainer == rhs.isActiveContainer
-    }
-    
+	public static func == (lhs: ItemsCollection<SearchCriteria>, rhs: ItemsCollection<SearchCriteria>) -> Bool {
+		lhs.typeString == rhs.typeString
+		&& lhs.metadata == rhs.metadata
+		&& lhs.searchCriteria == rhs.searchCriteria
+		&& lhs.thumbnail == rhs.thumbnail
+		&& lhs.displayTitle == rhs.displayTitle
+		&& lhs.displaySubtitle == rhs.displaySubtitle
+		&& lhs.isActiveContainer == rhs.isActiveContainer
+	}
+	
     public var typeString: String? { nil }
     public var metadata: MediaItemMetadata? { nil }
 
@@ -57,16 +57,16 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
 }
 
 public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: PlayableMediaItemsContainer {
-    public static func == (lhs: PlayableItemsCollection<SearchCriteria>, rhs: PlayableItemsCollection<SearchCriteria>) -> Bool {
-        lhs.typeString == rhs.typeString
-        && lhs.metadata == rhs.metadata
-        && lhs.searchCriteria == rhs.searchCriteria
-        && lhs.thumbnail == rhs.thumbnail
-        && lhs.displayTitle == rhs.displayTitle
-        && lhs.displaySubtitle == rhs.displaySubtitle
-        && lhs.isActiveContainer == rhs.isActiveContainer
-    }
-    
+	public static func == (lhs: PlayableItemsCollection<SearchCriteria>, rhs: PlayableItemsCollection<SearchCriteria>) -> Bool {
+		lhs.typeString == rhs.typeString
+		&& lhs.metadata == rhs.metadata
+		&& lhs.searchCriteria == rhs.searchCriteria
+		&& lhs.thumbnail == rhs.thumbnail
+		&& lhs.displayTitle == rhs.displayTitle
+		&& lhs.displaySubtitle == rhs.displaySubtitle
+		&& lhs.isActiveContainer == rhs.isActiveContainer
+	}
+	
     public var typeString: String? { nil }
     public var metadata: MediaItemMetadata? { nil }
 

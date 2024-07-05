@@ -3,7 +3,7 @@
 import Combine
 import Foundation
 
-public enum PowerState: Equatable {
+public enum PowerState: Hashable {
     case on, off, standby
 }
 

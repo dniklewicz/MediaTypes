@@ -44,10 +44,10 @@ public struct MockItemType: MediaItem {
 }
 
 public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
-    public static func == (lhs: MockPlayer, rhs: MockPlayer) -> Bool {
-        lhs.name == rhs.name
-    }
-    
+	public static func == (lhs: MockPlayer, rhs: MockPlayer) -> Bool {
+		lhs.name == rhs.name
+	}
+	
     public var name: String
     public var model: String
     public var ipAddress: String = ""
