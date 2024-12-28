@@ -3,6 +3,13 @@
 import Combine
 import Foundation
 
+public enum AddToQueueOption: Int, Hashable {
+	case playNow = 1
+	case playNext = 2
+	case addToEnd = 3
+	case replaceAndPlay = 4
+}
+
 public protocol PlayQueueProviding {
     associatedtype QueuedItemType: QueuedItem
 
@@ -10,6 +17,7 @@ public protocol PlayQueueProviding {
     var playQueuePublisher: Published<[QueuedItemType]>.Publisher { get }
 
     func updateQueue() async throws
-	func addToQueue(item: any MediaItem) async throws
+	func addToQueue(item: any MediaItem, option: AddToQueueOption) async throws
     func play(queuedItem: QueuedItemType) async throws
+	func removeFromQueue(items: [QueuedItemType]) async throws
 }

@@ -6,4 +6,5 @@ public protocol MediaRenderingGroupMember<Renderer>: Codable, Identifiable, Equa
     associatedtype Renderer: MediaRenderer
     var id: String { get }
     var role: MediaRenderingGroupMemberRole { get }
+	var name: String { get }
 }

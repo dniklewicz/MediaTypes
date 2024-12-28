@@ -4,10 +4,18 @@ import Combine
 import Foundation
 
 public struct MockGroupMember: MediaRenderingGroupMember {
+	public var name: String
+	
     public typealias Renderer = MockPlayer
 
     public var role: MediaRenderingGroupMemberRole
     public var id: MockPlayer.ID
+	
+	public init(role: MediaRenderingGroupMemberRole, id: MockPlayer.ID, name: String = "Test member") {
+		self.role = role
+		self.id = id
+		self.name = name
+	}
 }
 
 public struct MockGroup: MediaRenderingGroup {
@@ -17,6 +25,12 @@ public struct MockGroup: MediaRenderingGroup {
     public var name: String
     public var id: Int
     public var members: [MockGroupMember]
+	
+	public init(name: String, id: Int, members: [MockGroupMember]) {
+		self.name = name
+		self.id = id
+		self.members = members
+	}
 }
 
 public struct MockQueuedItem: QueuedItem {
@@ -41,6 +55,20 @@ public struct MockItemType: MediaItem {
     public var displaySubtitle: String?
     public var metadata: MediaItemMetadata?
     public var typeString: String?
+	
+	public init(
+		thumbnail: Artwork? = nil,
+		displayTitle: String,
+		displaySubtitle: String? = nil,
+		metadata: MediaItemMetadata? = nil,
+		typeString: String? = nil
+	) {
+		self.thumbnail = thumbnail
+		self.displayTitle = displayTitle
+		self.displaySubtitle = displaySubtitle
+		self.metadata = metadata
+		self.typeString = typeString
+	}
 }
 
 public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
@@ -109,6 +137,7 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public func playNext() {}
     public func playPrevious() {}
     public func updateQueue() {}
+	public func removeFromQueue(items: [MockQueuedItem]) async throws {}
     public func play(queuedItem: MockQueuedItem) {}
 
     public typealias MediaItemType = MockItemType
@@ -117,7 +146,7 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public func createGroup(withMembers members: [ID]) {}
     public func addToGroup(member: ID) {}
     public func leaveGroup() {}
-	public func addToQueue(item: any MediaItem) {}
+	public func addToQueue(item: any MediaItem, option: AddToQueueOption) async throws {}
     public func updateState() {}
     public func startUpdates() {}
     public func stopUpdates() {}
@@ -151,6 +180,10 @@ extension MockItemType {
 }
 
 public class MockManager: GroupableMediaRenderersManager {
+	public static func == (lhs: MockManager, rhs: MockManager) -> Bool {
+		lhs === rhs
+	}
+	
     public typealias Renderer = MockPlayer
 
     @Published public var renderers: [MockPlayer]

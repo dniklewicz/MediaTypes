@@ -3,7 +3,7 @@
 import Combine
 import Foundation
 
-public protocol MediaRenderersManager {
+public protocol MediaRenderersManager: Equatable {
     associatedtype Renderer: MediaRenderer
 
     var renderers: [Renderer] { get }

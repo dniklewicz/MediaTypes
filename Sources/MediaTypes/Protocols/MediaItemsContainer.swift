@@ -22,6 +22,11 @@ public struct NotSearchableCriteria: MediaSearchCriteria {
     public init() {}
 }
 
+struct MediaItemsContainerResponse {
+	let mediaItems: [any MediaItem]
+	let totalCount: Int?
+}
+
 public protocol MediaItemsContainer: MediaItem {
     associatedtype SearchCriteria: MediaSearchCriteria
 
@@ -41,6 +46,8 @@ public protocol MediaItemsContainer: MediaItem {
     ) async throws -> [any MediaItem]
 	
 	func searchWillCancel()
+
+	func getItems(range: ClosedRange<Int>) async throws -> ([any MediaItem], Int?)
 }
 
 public extension MediaItemsContainer {

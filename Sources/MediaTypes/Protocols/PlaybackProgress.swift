@@ -5,6 +5,12 @@ import Foundation
 public struct PlaybackProgress: Equatable {
     public let currentTime: TimeInterval
     public let totalTime: TimeInterval
+	public var progress: Double {
+		currentTime / totalTime
+	}
+	public var remainingTime: TimeInterval {
+		totalTime - currentTime
+	}
 
     public init(currentTime: TimeInterval, totalTime: TimeInterval) {
         self.currentTime = currentTime
