@@ -52,7 +52,7 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
         }
     }
     
-    public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
+	public func search(for keyword: String, using: SearchCriteria, range: ClosedRange<Int>, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
     public func searchWillCancel() {}
 
 	public func getItems(range: ClosedRange<Int>) async throws -> ([any MediaItem], Int?) {
@@ -113,7 +113,7 @@ public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: Playa
         }
     }
     
-    public func search(for keyword: String, using: SearchCriteria, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
+	public func search(for keyword: String, using: SearchCriteria, range: ClosedRange<Int>, isFirstSearch: Bool) async throws -> [any MediaItem] { [] }
     public func searchWillCancel() {}
 
 	public func getItems(range: ClosedRange<Int>) async throws -> ([any MediaItem], Int?) {

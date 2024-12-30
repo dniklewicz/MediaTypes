@@ -42,6 +42,7 @@ public protocol MediaItemsContainer: MediaItem {
     func search(
         for keyword: String,
         using: SearchCriteria,
+		range: ClosedRange<Int>,
 		isFirstSearch: Bool
     ) async throws -> [any MediaItem]
 	
@@ -60,6 +61,14 @@ public extension MediaItemsContainer {
     }
 	
 	var supportsItemsHiding: Bool { false }
+	
+	func search(
+		for keyword: String,
+		using: SearchCriteria,
+		range: ClosedRange<Int>
+	) async throws -> [any MediaItem] {
+		try await search(for: keyword, using: using, range: range, isFirstSearch: false)
+	}
 }
 
 public extension MediaItemsContainer
