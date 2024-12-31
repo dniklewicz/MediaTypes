@@ -42,7 +42,7 @@ public protocol MediaRenderer: Identifiable, Equatable {
     var speakerSettingsPublisher: Published<[any SpeakerSetting]>.Publisher { get }
 
     func play(item: Playable) async throws
-	func nextTrack(item: Playable) async throws
+	func scheduleNextTrack(item: Playable) async throws
     func set(volume: Int) async throws
     func set(mute: Bool) async throws
     func set(playState: PlayState) async throws

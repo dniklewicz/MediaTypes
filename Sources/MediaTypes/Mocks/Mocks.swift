@@ -72,6 +72,8 @@ public struct MockItemType: MediaItem {
 }
 
 public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
+	public func scheduleNextTrack(item: any Playable) async throws {}
+	
 	public static func == (lhs: MockPlayer, rhs: MockPlayer) -> Bool {
 		lhs.name == rhs.name
 	}
