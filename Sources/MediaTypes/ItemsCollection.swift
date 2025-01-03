@@ -23,7 +23,7 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
     public let thumbnail: Artwork?
     public let displayTitle: String
     public let displaySubtitle: String?
-	public let itemsProvider: ((@escaping (([any MediaItem]) -> Void)) -> Void)
+	let itemsProvider: ((@escaping (([any MediaItem]) -> Void)) -> Void)
     public var isActiveContainer: Bool? { nil }
 
     public init(

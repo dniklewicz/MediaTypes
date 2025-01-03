@@ -34,7 +34,6 @@ public protocol MediaItemsContainer: MediaItem {
     var displayTitle: String { get }
     var displaySubtitle: String? { get }
     var isAvailable: Bool { get }
-    var itemsProvider: ((@escaping (([any MediaItem]) -> Void)) -> Void) { get }
     var searchCriteria: [SearchCriteria] { get }
     var isActiveContainer: Bool? { get }
 	var supportsItemsHiding: Bool { get }
