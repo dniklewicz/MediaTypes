@@ -139,6 +139,8 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public func updateQueue() {}
 	public func removeFromQueue(items: [MockQueuedItem]) async throws {}
     public func play(queuedItem: MockQueuedItem) {}
+	public func clearQueue() async throws {}
+	public func moveQueue(items: [MockQueuedItem], insertAt: Int) async throws {}
 
     public typealias MediaItemType = MockItemType
     public typealias QueuedItemType = MockQueuedItem

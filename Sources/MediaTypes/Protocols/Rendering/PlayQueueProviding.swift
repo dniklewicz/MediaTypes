@@ -20,4 +20,6 @@ public protocol PlayQueueProviding {
 	func addToQueue(item: any MediaItem, option: AddToQueueOption) async throws
     func play(queuedItem: QueuedItemType) async throws
 	func removeFromQueue(items: [QueuedItemType]) async throws
+	func clearQueue() async throws
+	func moveQueue(items: [QueuedItemType], insertAt: Int) async throws
 }
