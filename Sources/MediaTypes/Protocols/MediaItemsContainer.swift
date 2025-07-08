@@ -17,7 +17,6 @@ extension MediaSearchCriteria {
 
 public struct NotSearchableCriteria: MediaSearchCriteria {
     public var name: String { "Not searchable" }
-    public var id: Int { 0 }
 
     public init() {}
 }

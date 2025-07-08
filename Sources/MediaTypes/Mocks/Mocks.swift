@@ -49,7 +49,7 @@ public struct MockQueuedItem: QueuedItem {
     }
 }
 
-public struct MockItemType: MediaItem {
+public struct MockItemType: MediaItem, Playable {
     public var thumbnail: Artwork?
     public var displayTitle: String
     public var displaySubtitle: String?
