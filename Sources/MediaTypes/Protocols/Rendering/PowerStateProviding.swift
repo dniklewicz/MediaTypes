@@ -9,7 +9,7 @@ public enum PowerState: Hashable {
 
 public protocol PowerStateProviding {
     var powerState: PowerState { get }
-    var powerStatePublisher: Published<PowerState>.Publisher { get }
+    var powerStatePublisher: AnyPublisher<PowerState, Never> { get }
 
     func set(powerState: PowerState) async throws
 }

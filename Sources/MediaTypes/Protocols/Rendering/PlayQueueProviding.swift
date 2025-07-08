@@ -14,7 +14,7 @@ public protocol PlayQueueProviding {
     associatedtype QueuedItemType: QueuedItem
 
     var playQueue: [QueuedItemType] { get }
-    var playQueuePublisher: Published<[QueuedItemType]>.Publisher { get }
+    var playQueuePublisher: AnyPublisher<[QueuedItemType], Never> { get }
 
     func updateQueue() async throws
 	func addToQueue(item: any MediaItem, option: AddToQueueOption) async throws

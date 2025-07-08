@@ -81,34 +81,34 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
     public var ipAddress: String = ""
 
     @Published public var playState: PlayState = .stop
-    public var playStatePublisher: Published<PlayState>.Publisher { $playState }
+    public var playStatePublisher: AnyPublisher<PlayState, Never> { $playState.eraseToAnyPublisher() }
 
     @Published public var volume: Int = 10
-    public var volumePublisher: Published<Int>.Publisher { $volume }
+    public var volumePublisher: AnyPublisher<Int, Never> { $volume.eraseToAnyPublisher() }
 
     @Published public var mute: Bool = false
-    public var mutePublisher: Published<Bool>.Publisher { $mute }
+    public var mutePublisher: AnyPublisher<Bool, Never> { $mute.eraseToAnyPublisher() }
 
     @Published public var zoneVolume: Int = 10
-    public var zoneVolumePublisher: Published<Int>.Publisher { $zoneVolume }
+    public var zoneVolumePublisher: AnyPublisher<Int, Never> { $zoneVolume.eraseToAnyPublisher() }
 
     @Published public var zoneMute: Bool = false
-    public var zoneMutePublisher: Published<Bool>.Publisher { $zoneMute }
+    public var zoneMutePublisher: AnyPublisher<Bool, Never> { $zoneMute.eraseToAnyPublisher() }
 
     @Published public var availableActions: [PlaybackAction] = []
-    public var availableActionsPublisher: Published<[PlaybackAction]>.Publisher { $availableActions }
+    public var availableActionsPublisher: AnyPublisher<[PlaybackAction], Never> { $availableActions.eraseToAnyPublisher() }
 
     @Published public var repeatMode: RepeatMode = .off
-    public var repeatModePublisher: Published<RepeatMode>.Publisher { $repeatMode }
+    public var repeatModePublisher: AnyPublisher<RepeatMode, Never> { $repeatMode.eraseToAnyPublisher() }
 
     @Published public var shuffleMode: ShuffleMode = .off
-    public var shuffleModePublisher: Published<ShuffleMode>.Publisher { $shuffleMode }
+    public var shuffleModePublisher: AnyPublisher<ShuffleMode, Never> { $shuffleMode.eraseToAnyPublisher() }
 
     @Published public var currentTrack: MockItemType?
-    public var currentTrackPublisher: Published<MockItemType?>.Publisher { $currentTrack }
+    public var currentTrackPublisher: AnyPublisher<MockItemType?, Never> { $currentTrack.eraseToAnyPublisher() }
 
     @Published public var progress: PlaybackProgress?
-    public var progressPublisher: Published<PlaybackProgress?>.Publisher { $progress}
+    public var progressPublisher: AnyPublisher<PlaybackProgress?, Never> { $progress.eraseToAnyPublisher() }
 	
 	public var minVolume: Double = 0
 	public var maxVolume: Double = 60
@@ -122,7 +122,7 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
             EnumerationSpeakerSetting(name: "Preset", id: "preset", value: "manual", cases: ["manual", "auto"])
         ]
     }()
-    public var speakerSettingsPublisher: Published<[any SpeakerSetting]>.Publisher { $speakerSettings }
+    public var speakerSettingsPublisher: AnyPublisher<[any SpeakerSetting], Never> { $speakerSettings.eraseToAnyPublisher() }
 
     public func play(item: Playable) {}
     public func set(volume: Int) {}
@@ -155,10 +155,10 @@ public class MockPlayer: GroupableMediaRenderer, PlayQueueProviding {
 
 	public var id: String
     @Published public var group: MockGroup?
-    public var groupPublisher: Published<MockGroup?>.Publisher { $group }
+    public var groupPublisher: AnyPublisher<MockGroup?, Never> { $group.eraseToAnyPublisher() }
 
     @Published public var playQueue: [MockQueuedItem] = []
-    public var playQueuePublisher: Published<[MockQueuedItem]>.Publisher { $playQueue }
+    public var playQueuePublisher: AnyPublisher<[MockQueuedItem], Never> { $playQueue.eraseToAnyPublisher() }
 
     public init(
         id: ID,
@@ -189,10 +189,10 @@ public class MockManager: GroupableMediaRenderersManager {
     public typealias Renderer = MockPlayer
 
     @Published public var renderers: [MockPlayer]
-    public var renderersPublisher: Published<[MockPlayer]>.Publisher { $renderers }
+    public var renderersPublisher: AnyPublisher<[MockPlayer], Never> { $renderers.eraseToAnyPublisher() }
 
     @Published public var groups: [MockGroup]
-    public var groupsPublisher: Published<[MockGroup]>.Publisher { $groups }
+    public var groupsPublisher: AnyPublisher<[MockGroup], Never> { $groups.eraseToAnyPublisher() }
 
     public init(renderers: [MockPlayer], groups: [MockGroup] = []) {
         self.renderers = renderers
@@ -228,7 +228,7 @@ public class MockManager: GroupableMediaRenderersManager {
 
 public class PowerableMockPlayer: MockPlayer, PowerStateProviding {
     @Published public var powerState: PowerState
-    public var powerStatePublisher: Published<PowerState>.Publisher { $powerState }
+    public var powerStatePublisher: AnyPublisher<PowerState, Never> { $powerState.eraseToAnyPublisher() }
     public func set(powerState: PowerState) async throws {}
 
     public init(

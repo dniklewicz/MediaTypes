@@ -18,7 +18,7 @@ public class ItemsCollection<SearchCriteria: MediaSearchCriteria>: MediaItemsCon
     public var metadata: MediaItemMetadata? { nil }
 
     @Published public var searchCriteria: [SearchCriteria] = []
-    public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
+    public var searchCriteriaPublisher: AnyPublisher<[SearchCriteria], Never> { $searchCriteria.eraseToAnyPublisher() }
 
     public let thumbnail: Artwork?
     public let displayTitle: String
@@ -79,7 +79,7 @@ public class PlayableItemsCollection<SearchCriteria: MediaSearchCriteria>: Playa
     public var metadata: MediaItemMetadata? { nil }
 
     @Published public var searchCriteria: [SearchCriteria] = []
-    public var searchCriteriaPublisher: Published<[SearchCriteria]>.Publisher { $searchCriteria }
+    public var searchCriteriaPublisher: AnyPublisher<[SearchCriteria], Never> { $searchCriteria.eraseToAnyPublisher() }
 
     public let thumbnail: Artwork?
     public let displayTitle: String

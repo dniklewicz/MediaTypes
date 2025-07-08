@@ -12,34 +12,34 @@ public protocol MediaRenderer: Identifiable, Equatable {
     var ipAddress: String { get }
 
     var playState: PlayState { get }
-    var playStatePublisher: Published<PlayState>.Publisher { get }
+    var playStatePublisher: AnyPublisher<PlayState, Never> { get }
 	
 	var minVolume: Double { get }
 	var maxVolume: Double { get }
 
     var volume: Int { get }
-    var volumePublisher: Published<Int>.Publisher { get }
+    var volumePublisher: AnyPublisher<Int, Never> { get }
 
     var mute: Bool { get }
-    var mutePublisher: Published<Bool>.Publisher { get }
+    var mutePublisher: AnyPublisher<Bool, Never> { get }
 
     var availableActions: [PlaybackAction] { get }
-    var availableActionsPublisher: Published<[PlaybackAction]>.Publisher { get }
+    var availableActionsPublisher: AnyPublisher<[PlaybackAction], Never> { get }
 
     var repeatMode: RepeatMode { get }
-    var repeatModePublisher: Published<RepeatMode>.Publisher { get }
+    var repeatModePublisher: AnyPublisher<RepeatMode, Never> { get }
 
     var shuffleMode: ShuffleMode { get }
-    var shuffleModePublisher: Published<ShuffleMode>.Publisher { get }
+    var shuffleModePublisher: AnyPublisher<ShuffleMode, Never> { get }
 
     var currentTrack: MediaItemType? { get }
-    var currentTrackPublisher: Published<MediaItemType?>.Publisher { get }
+    var currentTrackPublisher: AnyPublisher<MediaItemType?, Never> { get }
 
     var progress: PlaybackProgress? { get }
-    var progressPublisher: Published<PlaybackProgress?>.Publisher { get }
+    var progressPublisher: AnyPublisher<PlaybackProgress?, Never> { get }
 
     var speakerSettings: [any SpeakerSetting] { get }
-    var speakerSettingsPublisher: Published<[any SpeakerSetting]>.Publisher { get }
+    var speakerSettingsPublisher: AnyPublisher<[any SpeakerSetting], Never> { get }
 
     func play(item: Playable) async throws
     func set(volume: Int) async throws
